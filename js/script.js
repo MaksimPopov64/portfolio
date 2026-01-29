@@ -1,10 +1,10 @@
 // Простая навигация для мобильного меню
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    
+
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function () {
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
             if (navLinks.style.display === 'flex') {
                 navLinks.style.flexDirection = 'column';
@@ -19,22 +19,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Плавная прокрутка для якорных ссылок
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
                 });
-                
+
                 // Закрываем мобильное меню после клика
                 if (window.innerWidth <= 768) {
                     navLinks.style.display = 'none';
@@ -42,4 +42,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    direction: 'vertical',
+    loop: true,
+    effect: "cards",
+    grabCursor: true,
+
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+        el: '.swiper-scrollbar',
+    },
 });
